@@ -20,7 +20,7 @@ interface GardenLevelProps {
   }
 }
 
-// Funzione helper per creare l'animazione di conteggio
+// Helper function to create the counting animation
 function useAnimatedNumber(value: number) {
   const motionValue = useMotionValue(0);
   const roundedValue = useTransform(motionValue, (latest) => Math.round(latest).toLocaleString());
@@ -36,10 +36,10 @@ function useAnimatedNumber(value: number) {
 
 export default function GardenLevel({ totalPlays, artistCount, tracksCount, gardenSize, insights, userInfo }: GardenLevelProps) {
   const calculateXP = () => {
-    // Calcolo XP basato sulle canzoni diverse invece che sui plays totali
+    // Calculate XP based on unique tracks instead of total plays
     const tracksXp = Math.floor(tracksCount / 5)
-    const tracksCountXp = tracksXp * 2
-    const artistsXp = artistCount * 4
+    const tracksCountXp = tracksCount 
+    const artistsXp = artistCount * 2
     return tracksXp + artistsXp + tracksCountXp
   }
 
@@ -76,18 +76,18 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
     userInfo?.image?.find((img) => img.size === "large")?.["#text"] ||
     userInfo?.image?.find((img) => img.size === "medium")?.["#text"]
 
-  const animatedTracksCount = useAnimatedNumber(tracksCount); // Animazione per tracksCount
+  const animatedTracksCount = useAnimatedNumber(tracksCount); // Animation for tracksCount
   const animatedArtistCount = useAnimatedNumber(artistCount);
   const animatedCurrentXP = useAnimatedNumber(currentXP);
 
-  // Anima i valori della barra di progresso solo se il livello è inferiore a 100
+  // Animate the progress bar values only if the level is less than 100
   const animatedProgressXP = currentLevel < 100 ? useAnimatedNumber(progressXP) : null;
   const animatedNeededXP = currentLevel < 100 ? useAnimatedNumber(neededXP) : null;
 
   return (
     <Card className="card-glow border-0 shadow-xl mb-8">
       <CardContent className="p-6">
-        {/* Header con animazione di un leggero movimento */}
+        {/* Header with a slight motion animation */}
         <motion.div
           className="flex items-center justify-between mb-4"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -119,7 +119,7 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
               <p className="text-sm text-muted-foreground">{title}</p>
             </div>
           </div>
-          {/* Badge XP con animazione al tap */}
+          {/* XP Badge with a tap animation */}
           <motion.div whileTap={{ scale: 0.95 }}>
             <Badge variant="secondary" className="font-bold text-lg px-3 py-1">
               <motion.span>{animatedCurrentXP}</motion.span> XP
@@ -131,13 +131,13 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
               <span className="text-muted-foreground">
-                Progresso al <span className="text-primary">Livello {currentLevel + 1}</span>
+                Progress to <span className="text-primary">Level {currentLevel + 1}</span>
               </span>
               <span className="text-foreground">
                 <motion.span>{animatedProgressXP}</motion.span> / <motion.span>{animatedNeededXP}</motion.span> XP
               </span>
             </div>
-            {/* Barra di progresso animata con Framer Motion */}
+            {/* Animated progress bar with Framer Motion */}
             <motion.div
               initial={{ width: "0%" }}
               animate={{ width: `${(progressXP / neededXP) * 100}%` }}
@@ -165,18 +165,18 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
         )}
 
         <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-border/50">
-          {/* Statistiche senza animazione di entrata per non scontrarsi con il conteggio */}
+          {/* Statistics without entry animation to avoid conflicting with the count */}
           <motion.div
             className="text-center"
           >
             <div className="text-2xl font-bold text-primary"><motion.span>{animatedTracksCount}</motion.span></div>
-            <div className="text-xs text-muted-foreground">Canzoni Diverse</div>
+            <div className="text-xs text-muted-foreground">Unique Tracks</div>
           </motion.div>
           <motion.div
             className="text-center"
           >
             <div className="text-2xl font-bold text-secondary"><motion.span>{animatedArtistCount}</motion.span></div>
-            <div className="text-xs text-muted-foreground">Artisti Sbloccati</div>
+            <div className="text-xs text-muted-foreground">Artists Unlocked</div>
           </motion.div>
         </div>
       </CardContent>

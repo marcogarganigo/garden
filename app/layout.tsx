@@ -28,6 +28,9 @@ export default function RootLayout({
       lang="it"
       className={`${openSans.variable} ${montserrat.variable} antialiased`}
     >
+      <head>
+        <title>Garden.fm</title>
+      </head>
       <body suppressHydrationWarning>
         <div className="min-h-screen garden-bg">
           {children}
