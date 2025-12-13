@@ -166,37 +166,83 @@ export default function DataVisualizations({ artists, topTracks, insights, usern
               <p className="text-sm text-muted-foreground">Top genres from your track tags</p>
             </CardHeader>
             <CardContent>
-              <div className="relative w-48 h-48 mx-auto mb-6">
-                <div className="absolute inset-0 rounded-full border-8 border-muted flex items-center justify-center">
-                  <span className="text-2xl">🌻</span>
-                </div>
-                {genreData.map((genre, index) => {
-                  const angle = index * 90 - 90
-                  const x = Math.cos((angle * Math.PI) / 180) * 80
-                  const y = Math.sin((angle * Math.PI) / 180) * 80
-                  return (
-                    <motion.div
-                      key={genre.name}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.5 + index * 0.1, duration: 0.5, type: "spring" }}
-                      className="absolute w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                      style={{
-                        left: `calc(50% + ${x}px - 16px)`,
-                        top: `calc(50% + ${y}px - 16px)`,
-                        backgroundColor: genre.color.includes("red")
-                          ? "#ef4444"
-                          : genre.color.includes("blue")
-                            ? "#3b82f6"
-                            : genre.color.includes("green")
-                              ? "#22c55e"
-                              : "#a855f7",
-                      }}
-                    >
-                      {genre.percentage}%
-                    </motion.div>
-                  )
-                })}
+              <div className="relative w-64 h-64 mx-auto mb-6">
+                <svg viewBox="0 0 200 200" className="w-full h-full transform -rotate-90">
+                  {genreData.map((genre, index) => {
+                    const prevPercentages = genreData.slice(0, index).reduce((sum, g) => sum + g.percentage, 0)
+                    const startAngle = (prevPercentages / 100) * 360
+                    const endAngle = ((prevPercentages + genre.percentage) / 100) * 360
+                    
+                    const startRad = (startAngle * Math.PI) / 180
+                    const endRad = (endAngle * Math.PI) / 180
+                    
+                    const x1 = 100 + 80 * Math.cos(startRad)
+                    const y1 = 100 + 80 * Math.sin(startRad)
+                    const x2 = 100 + 80 * Math.cos(endRad)
+                    const y2 = 100 + 80 * Math.sin(endRad)
+                    
+                    const largeArc = genre.percentage > 50 ? 1 : 0
+                    
+                    const pathData = [
+                      `M 100 100`,
+                      `L ${x1} ${y1}`,
+                      `A 80 80 0 ${largeArc} 1 ${x2} ${y2}`,
+                      `Z`
+                    ].join(' ')
+                    
+                    const fillColor = genre.color.includes("red")
+                      ? "#ef4444"
+                      : genre.color.includes("blue")
+                        ? "#3b82f6"
+                        : genre.color.includes("green")
+                          ? "#22c55e"
+                          : "#a855f7"
+                    
+                    return (
+                      <motion.path
+                        key={genre.name}
+                        d={pathData}
+                        fill={fillColor}
+                        stroke="white"
+                        strokeWidth="2"
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ 
+                          delay: 0.5 + index * 0.15, 
+                          duration: 0.6, 
+                          type: "spring",
+                          stiffness: 100
+                        }}
+                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                        style={{ transformOrigin: "100px 100px" }}
+                      />
+                    )
+                  })}
+                  
+                  {/* Centro decorativo con icona fiore */}
+                  <motion.circle
+                    cx="100"
+                    cy="100"
+                    r="35"
+                    fill="white"
+                    stroke="#e5e7eb"
+                    strokeWidth="3"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 1, duration: 0.5, type: "spring" }}
+                  />
+                  <motion.text
+                    x="100"
+                    y="110"
+                    textAnchor="middle"
+                    fontSize="28"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2, duration: 0.5 }}
+                  >
+                    🌸
+                  </motion.text>
+                </svg>
               </div>
               <div className="space-y-2">
                 {genreData.map((genre) => (

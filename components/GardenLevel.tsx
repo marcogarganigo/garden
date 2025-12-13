@@ -37,7 +37,7 @@ function useAnimatedNumber(value: number) {
 export default function GardenLevel({ totalPlays, artistCount, tracksCount, gardenSize, insights, userInfo }: GardenLevelProps) {
   const calculateXP = () => {
     // Calculate XP based on unique tracks instead of total plays
-    const tracksXp = Math.floor(tracksCount / 5)
+    const tracksXp = Math.floor(totalPlays / 20)
     const tracksCountXp = tracksCount 
     const artistsXp = artistCount * 2
     return tracksXp + artistsXp + tracksCountXp

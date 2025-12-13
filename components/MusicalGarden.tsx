@@ -102,7 +102,6 @@ export default function MusicalGarden() {
 
   const fetchUserInfo = async (user: string) => {
     const url = `https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=${user}&api_key=${API_KEY}&format=json`
-
     try {
       const response = await fetch(url)
       const data: UserInfoResponse = await response.json()
@@ -115,9 +114,7 @@ export default function MusicalGarden() {
         totalPlays: Number.parseInt(data.user.playcount),
         tracksCount: Number.parseInt(data.user.track_count),
         artistCount: Number.parseInt(data.user.artist_count),
-        memberSince: data.user.registered
-          ? new Date(Number.parseInt(data.user.registered.unixtime) * 1000).getFullYear()
-          : null,
+        memberSince: data.user.registered ? Number.parseInt(data.user.registered.unixtime) : null,
         country: data.user.country || null,
         userInfo: {
           name: data.user.name,
@@ -187,7 +184,6 @@ export default function MusicalGarden() {
     const loyaltyScore = Math.round((topArtistPlays / totalPlays) * 100)
 
     const explorationScore = Math.round(artistDiversity)
-
     return {
       totalPlays: userInfo?.totalPlays || totalPlays,
       artistDiversity,
@@ -297,30 +293,42 @@ export default function MusicalGarden() {
             </h1>
             <Music className="w-8 h-8 text-accent animate-pulse-slow" />
           </motion.div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
-          >
-            Cultivate your musical ecosystem. Plant seeds from your{" "}
-            <a
-              href="https://last.fm"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-primary"
-            >
-              Last.fm
-            </a>{" "}
-            listening history and watch your personal garden flourish with every beat, melody, and rhythm you cherish.
-          </motion.p>
-          <motion.a
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            href="/info"
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
-          >Info</motion.a>
+          <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.3, duration: 0.5 }}
+  className="flex flex-col items-center gap-6 max-w-2xl mx-auto"
+>
+  <p className="text-lg text-muted-foreground leading-relaxed">
+    Cultivate your musical ecosystem. Plant seeds from your{" "}
+    <a
+      href="https://last.fm"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline hover:text-primary"
+    >
+      Last.fm
+    </a>{" "}
+    listening history and watch your personal garden flourish with every beat,
+    melody, and rhythm you cherish.
+  </p>
+
+  {/* Moved + Centered How It Works button */}
+  <motion.a
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5, duration: 0.5 }}
+    href="/info"
+    className="inline-flex items-center px-5 py-2.5 rounded-xl border border-primary/40 text-sm font-semibold 
+               text-primary/90 hover:text-primary hover:border-primary bg-background/40 backdrop-blur-sm 
+               transition-all duration-300 shadow-sm hover:shadow-md"
+  >
+    How It Works
+  </motion.a>
+</motion.div>
+
+           
+
         </div>
 
         <motion.form

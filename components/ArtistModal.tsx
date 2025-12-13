@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-interface Artist {
+interface Artist {  
     name: string
     playcount: string
     url: string
@@ -71,7 +71,7 @@ export const ArtistModal = ({ artist, onClose, artistDetails, topTracks, isLoadi
                             >
                                 <Loader2 className="w-10 h-10 sm:w-12 sm:h-12 text-primary" />
                             </motion.div>
-                            <span className="text-sm sm:text-base text-muted-foreground">Caricamento dettagli artista...</span>
+                            <span className="text-sm sm:text-base text-muted-foreground">Loading artist details...</span>
                         </div>
                     </div>
                 ) : (
