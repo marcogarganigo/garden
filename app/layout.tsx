@@ -1,9 +1,7 @@
 // app/layout.tsx
-
-import type ReactType from "react";
+import type { ReactNode } from "react";
 import { Open_Sans, Montserrat } from "next/font/google";
 import "./globals.css";
-import KoFiWidget from '@/components/KoFiWidget'
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -18,29 +16,23 @@ const montserrat = Montserrat({
   weight: ["400", "600", "700", "900"],
 });
 
+export const dynamic = "force-static";
+
 export default function RootLayout({
   children,
 }: {
-  children: ReactType.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html
       lang="it"
       className={`${openSans.variable} ${montserrat.variable} antialiased`}
     >
-      <head>
-        <title>Garden.fm</title>
-      </head>
-      <body suppressHydrationWarning>
+      <body>
         <div className="min-h-screen garden-bg">
           {children}
         </div>
-        <KoFiWidget />
       </body>
     </html>
   );
 }
-
-export const metadata = {
-  generator: 'v0.app'
-};
