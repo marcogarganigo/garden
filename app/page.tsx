@@ -1,4 +1,4 @@
-import MusicalGarden from "@/components/musicalGarden"
+import MusicalGarden from "@/components/Garden"
 
 export default function Home() {
   return <MusicalGarden />

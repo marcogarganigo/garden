@@ -20,7 +20,6 @@ interface GardenLevelProps {
   }
 }
 
-// Helper function to create the counting animation
 function useAnimatedNumber(value: number) {
   const motionValue = useMotionValue(0);
   const roundedValue = useTransform(motionValue, (latest) => Math.round(latest).toLocaleString());
@@ -36,7 +35,7 @@ function useAnimatedNumber(value: number) {
 
 export default function GardenLevel({ totalPlays, artistCount, tracksCount, gardenSize, insights, userInfo }: GardenLevelProps) {
   const calculateXP = () => {
-    // Calculate XP based on unique tracks instead of total plays
+    // XP Calculation Logic 
     const tracksXp = Math.floor(totalPlays / 20)
     const tracksCountXp = tracksCount 
     const artistsXp = artistCount * 2
@@ -80,14 +79,13 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
   const animatedArtistCount = useAnimatedNumber(artistCount);
   const animatedCurrentXP = useAnimatedNumber(currentXP);
 
-  // Animate the progress bar values only if the level is less than 100
+  // Animate the progress bar
   const animatedProgressXP = currentLevel < 100 ? useAnimatedNumber(progressXP) : null;
   const animatedNeededXP = currentLevel < 100 ? useAnimatedNumber(neededXP) : null;
 
   return (
     <Card className="card-glow border-0 shadow-xl mb-8">
       <CardContent className="p-6">
-        {/* Header with a slight motion animation */}
         <motion.div
           className="flex items-center justify-between mb-4"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -119,7 +117,7 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
               <p className="text-sm text-muted-foreground">{title}</p>
             </div>
           </div>
-          {/* XP Badge with a tap animation */}
+          {/* XP Badge */}
           <motion.div whileTap={{ scale: 0.95 }}>
             <Badge variant="secondary" className="font-bold text-lg px-3 py-1">
               <motion.span>{animatedCurrentXP}</motion.span> XP

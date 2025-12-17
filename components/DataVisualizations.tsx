@@ -20,7 +20,7 @@ interface DataVisualizationsProps {
 export default function DataVisualizations({ artists, topTracks, insights, username }: DataVisualizationsProps) {
   const [genreData, setGenreData] = useState([{ name: "Loading...", percentage: 100, color: "bg-primary" }])
 
-  const API_KEY = atob(process.env.NEXT_PUBLIC_API_KEY2 || "")
+  const API_KEY = atob(process.env.NEXT_PUBLIC_LASTFM_API_KEY || "")
 
   useEffect(() => {
     if (username) {

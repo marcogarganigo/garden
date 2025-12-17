@@ -16,7 +16,6 @@ interface GardenStatsProps {
   userStats?: { totalPlays: number; artistCount: number } | null
 }
 
-// Funzione helper per creare l'animazione di conteggio
 function useAnimatedNumber(value: number) {
   const motionValue = useMotionValue(0);
   const roundedValue = useTransform(motionValue, (latest) => Math.round(latest).toLocaleString());
@@ -46,7 +45,6 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
     sprouts: artists.filter((a) => Number.parseInt(a.playcount) < 1000).length,
   }
 
-  // Usa il nuovo hook per i numeri che devono essere animati
   const animatedTotalPlays = useAnimatedNumber(totalPlays);
   const animatedAveragePlays = useAnimatedNumber(averagePlays);
   const animatedTopArtistPlays = useAnimatedNumber(Number.parseInt(topArtist?.playcount || "0"));

@@ -99,7 +99,7 @@
     const [artistTopTracks, setArtistTopTracks] = useState<any[]>([])
     const [isModalLoading, setIsModalLoading] = useState(false)
 
-    const API_KEY = atob(process.env.NEXT_PUBLIC_API_KEY2 || "")
+    const API_KEY = atob(process.env.NEXT_PUBLIC_LASTFM_API_KEY || "")
 
     const FEEDBACK_URL = "https://github.com/marcogarganigo/garden/issues/new/choose";
     const GITHUB_URL = "https://github.com/marcogarganigo/garden";
@@ -335,43 +335,39 @@
               <Music className="w-8 h-8 text-accent animate-pulse-slow" />
             </motion.div>
             <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.3, duration: 0.5 }}
-    className="flex flex-col items-center gap-6 max-w-2xl mx-auto"
-  >
-    <p className="text-lg text-muted-foreground leading-relaxed">
-      Cultivate your musical ecosystem. Plant seeds from your{" "}
-      <a
-        href="https://last.fm"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="underline hover:text-primary"
-      >
-        Last.fm
-      </a>{" "}
-      listening history and watch your personal garden flourish with every beat,
-      melody, and rhythm you cherish.
-    </p>
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="flex flex-col items-center gap-6 max-w-2xl mx-auto"
+            >
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Cultivate your musical ecosystem. Plant seeds from your{" "}
+                <a
+                  href="https://last.fm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-primary"
+                >
+                  Last.fm
+                </a>{" "}
+                listening history and watch your personal garden flourish with every beat,
+                melody, and rhythm you cherish.
+              </p>
 
-    {/* Moved + Centered How It Works button */}
-    <motion.a
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.5 }}
-      href="/info"
-      className="inline-flex items-center px-5 py-2.5 rounded-xl border border-primary/40 text-sm font-semibold 
-                text-primary/90 hover:text-primary hover:border-primary bg-background/40 backdrop-blur-sm 
-                transition-all duration-300 shadow-sm hover:shadow-md"
-    >
-      How It Works
-    </motion.a>
-  </motion.div>
-
-            
-
+              {/* Moved + Centered How It Works button */}
+              <motion.a
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                href="/info"
+                className="inline-flex items-center px-5 py-2.5 rounded-xl border border-primary/40 text-sm font-semibold 
+                          text-primary/90 hover:text-primary hover:border-primary bg-background/40 backdrop-blur-sm 
+                          transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                How It Works
+              </motion.a>
+            </motion.div>
           </div>
-
           <motion.form
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+const repo = 'garden';
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -7,11 +10,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: false,
+    unoptimized: true,
   },
   output: 'export',
-  devIndicators: false
+  devIndicators: false,
 
-}
+  basePath: isProd ? `/${repo}` : '',
+  assetPrefix: isProd ? `/${repo}/` : '',
+};
 
-export default nextConfig
+export default nextConfig;
