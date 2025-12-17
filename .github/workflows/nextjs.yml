@@ -2,9 +2,14 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]  # O il branch che usi
+    branches: [ main ]
   pull_request:
     branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
