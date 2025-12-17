@@ -354,18 +354,14 @@
                 melody, and rhythm you cherish.
               </p>
 
-              {/* Moved + Centered How It Works button */}
-              <motion.a
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+              <a
                 href="/info"
                 className="inline-flex items-center px-5 py-2.5 rounded-xl border border-primary/40 text-sm font-semibold 
                           text-primary/90 hover:text-primary hover:border-primary bg-background/40 backdrop-blur-sm 
                           transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 How It Works
-              </motion.a>
+              </a>
             </motion.div>
           </div>
           <motion.form
