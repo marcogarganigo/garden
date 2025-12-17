@@ -353,8 +353,6 @@
                 listening history and watch your personal garden flourish with every beat,
                 melody, and rhythm you cherish.
               </p>
-
-              {/* Error Checking
               <motion.a
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -365,7 +363,7 @@
                           transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 How It Works
-              </motion.a>*/}
+              </motion.a>*
             </motion.div>
           </div>
           <motion.form
