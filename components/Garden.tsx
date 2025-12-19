@@ -282,43 +282,6 @@
 
     return (
       <div className="min-h-screen">
-        <div className="absolute top-2 right-4 z-20 flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3">
-          {/* Feedback */}
-          <Button
-            asChild
-            variant="ghost"
-            size="sm"
-            className="flex items-center gap-2 bg-white/30 text-gray-800 hover:bg-purple-200 hover:text-purple-800 rounded-lg px-3 py-1 shadow-sm transition-all duration-300"
-          >
-            <a
-              href={FEEDBACK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <MessageSquare className="w-4 h-4" />
-              <span className="hidden sm:inline font-semibold text-sm">Feedback & Issues</span>
-            </a>
-          </Button>
-
-          {/* GitHub */}
-          <Button
-            asChild
-            variant="ghost"
-            size="sm"
-            className="flex items-center justify-center bg-white/30 text-gray-800 hover:bg-purple-200 hover:text-purple-800 rounded-lg p-2 shadow-sm transition-all duration-300"
-          >
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View on GitHub"
-              className="flex items-center"
-            >
-              <GitHubIcon className="w-5 h-5" />
-            </a>
-          </Button>
-        </div>
         <div className="relative z-10 container mx-auto px-4 py-8">
           <div className="text-center mb-12">
             <motion.div
@@ -510,6 +473,44 @@
             />
           )}
         </div>
+        <footer className="relative mt-24 overflow-hidden bg-transparent">
+          <img
+            src="/bush-right2.png"
+            alt="Bush"
+            width="200"
+            className="absolute bottom-0 right-12 "
+          />
+          <a href="" className="w-min-content h-min-content" rel="nofollow"><img alt="banner" src="https://landings-cdn.adsterratech.com/referralBanners/png/80%20x%2030%20px.png" /></a>
+
+          <div className="relative container mx-auto px-4 py-20 text-center">
+            <p className="text-sm text-muted-foreground mb-6">
+              Your garden isn’t finished — it grows with you 🌱
+            </p>
+
+            {/* Signs in the garden */}
+            <div className="flex items-center justify-center gap-6">
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white/70 px-4 py-2 rounded-lg shadow-lg hover:bg-white"
+              >
+                <GitHubIcon className="w-5 h-5" />
+                <span className="font-semibold text-sm">GitHub</span>
+              </a>
+
+              <a
+                href={FEEDBACK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-200/60 px-4 py-2 rounded-lg shadow-lg hover:bg-green-200"
+              >
+                <MessageSquare className="w-5 h-5" />
+                <span className="font-semibold text-sm">Feedback</span>
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
     )
   }

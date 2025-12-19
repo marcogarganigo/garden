@@ -10,10 +10,10 @@ export default function KoFiWidget() {
 
     script.onload = () => {
       if ((window as any).kofiWidgetOverlay) {
-        (window as any).kofiWidgetOverlay.draw('kkchito', {
+        (window as any).kofiWidgetOverlay.draw('marcogarganigo', {
           type: 'floating-chat',
           'floating-chat.donateButton.text': 'Support me',
-          'floating-chat.donateButton.background-color': '#66BB6A',
+          'floating-chat.donateButton.background-color': '#7dc781ff',
           'floating-chat.donateButton.text-color': '#fff',
         });
       }

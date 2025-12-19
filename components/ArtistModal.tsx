@@ -57,7 +57,7 @@ export const ArtistModal = ({ artist, onClose, artistDetails, topTracks, isLoadi
                     onClick={onClose}
                     variant="ghost"
                     size="icon"
-                    className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 text-muted-foreground hover:bg-muted"
+                    className="absolute cursor-pointer top-2 right-2 sm:top-4 sm:right-4 z-10 text-muted-foreground text-black-400 hover:text-red-400 hover:bg-muted"
                 >
                     <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </Button>

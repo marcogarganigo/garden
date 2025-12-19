@@ -22,10 +22,30 @@ export const dynamic = "force-static";
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
-      lang="it"
+      lang="en"
       className={`${openSans.variable} ${montserrat.variable} antialiased`}
     >
       <head>
+        {/* Title & Description */}
+        <title>Garden.fm - Your Personal Music Garden</title>
+        <meta name="description" content="Garden.fm is your personal space to discover, listen, and cultivate music in a unique sound garden." />
+        <meta name="keywords" content="music, garden.fm, lastfm, last.fm playlist, online music, audio streaming" />
+        <meta name="author" content="marcogarganigo" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" href="/favicon.ico" />
+
+        <meta property="og:title" content="Garden.fm - Your Personal Music Garden" />
+        <meta property="og:description" content="Discover and listen to music in a unique sound garden." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://marcogarganigo.github.io" />
+        {/*<meta property="og:image" content="https://marcogarganigo.github.io/preview.png" />*/}
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Garden.fm - Your Personal Music Garden" />
+        <meta name="twitter:description" content="Discover and listen to music in a unique sound garden." />
+        {/*<meta name="twitter:image" content="https://marcogarganigo.github.io/preview.png" />*/}
+
         {/* Google Analytics 4 */}
         <Script
           strategy="afterInteractive"
