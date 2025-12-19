@@ -16,6 +16,7 @@
   import DataVisualizations from "./DataVisualizations"
   import GardenLevel from "./GardenLevel"
   import { ArtistModal } from "./ArtistModal"
+  import AdsterraBanner from "./AdsterraBanner"
 
   interface Artist {
     name: string
@@ -478,27 +479,16 @@
             src="/bush-right2.png"
             alt="Bush"
             width="200"
-            className="absolute bottom-0 right-12"
+            className="absolute bottom-0 right-12 "
           />
+          <AdsterraBanner />
 
           <div className="relative container mx-auto px-4 py-20 text-center">
             <p className="text-sm text-muted-foreground mb-6">
               Your garden isn’t finished — it grows with you 🌱
             </p>
 
-            {/* Banner pubblicitario */}
-            <div className="mb-6">
-              <iframe
-                title="Ad Banner"
-                src="https://www.highperformanceformat.com/4fec492b1d10c0ec6fe34a7ba2e84252/invoke.js"
-                width="320"
-                height="50"
-                style={{ border: "none", overflow: "hidden" }}
-                scrolling="no"
-              ></iframe>
-            </div>
-
-            {/* Links GitHub e Feedback */}
+            {/* Signs in the garden */}
             <div className="flex items-center justify-center gap-6">
               <a
                 href={GITHUB_URL}
