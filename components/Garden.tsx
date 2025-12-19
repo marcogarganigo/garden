@@ -478,16 +478,27 @@
             src="/bush-right2.png"
             alt="Bush"
             width="200"
-            className="absolute bottom-0 right-12 "
+            className="absolute bottom-0 right-12"
           />
-          <a href="" className="w-min-content h-min-content" rel="nofollow"><img alt="banner" src="https://landings-cdn.adsterratech.com/referralBanners/png/80%20x%2030%20px.png" /></a>
 
           <div className="relative container mx-auto px-4 py-20 text-center">
             <p className="text-sm text-muted-foreground mb-6">
               Your garden isn’t finished — it grows with you 🌱
             </p>
 
-            {/* Signs in the garden */}
+            {/* Banner pubblicitario */}
+            <div className="mb-6">
+              <iframe
+                title="Ad Banner"
+                src="https://www.highperformanceformat.com/4fec492b1d10c0ec6fe34a7ba2e84252/invoke.js"
+                width="320"
+                height="50"
+                style={{ border: "none", overflow: "hidden" }}
+                scrolling="no"
+              ></iframe>
+            </div>
+
+            {/* Links GitHub e Feedback */}
             <div className="flex items-center justify-center gap-6">
               <a
                 href={GITHUB_URL}

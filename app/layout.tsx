@@ -1,3 +1,4 @@
+// app/layout.tsx
 import { ReactNode } from "react";
 import Script from "next/script";
 import { Open_Sans, Montserrat } from "next/font/google";
@@ -27,34 +28,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         {/* Title & Description */}
         <title>Garden.fm - Your Personal Music Garden</title>
-        <meta
-          name="description"
-          content="Garden.fm is your personal space to discover, listen, and cultivate music in a unique sound garden."
-        />
-        <meta
-          name="keywords"
-          content="music, garden.fm, lastfm, last.fm playlist, online music, audio streaming"
-        />
+        <meta name="description" content="Garden.fm is your personal space to discover, listen, and cultivate music in a unique sound garden." />
+        <meta name="keywords" content="music, garden.fm, lastfm, last.fm playlist, online music, audio streaming" />
         <meta name="author" content="marcogarganigo" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="icon" href="/favicon.ico" />
 
         <meta property="og:title" content="Garden.fm - Your Personal Music Garden" />
-        <meta
-          property="og:description"
-          content="Discover and listen to music in a unique sound garden."
-        />
+        <meta property="og:description" content="Discover and listen to music in a unique sound garden." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://marcogarganigo.github.io" />
         {/*<meta property="og:image" content="https://marcogarganigo.github.io/preview.png" />*/}
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Garden.fm - Your Personal Music Garden" />
-        <meta
-          name="twitter:description"
-          content="Discover and listen to music in a unique sound garden."
-        />
+        <meta name="twitter:description" content="Discover and listen to music in a unique sound garden." />
         {/*<meta name="twitter:image" content="https://marcogarganigo.github.io/preview.png" />*/}
 
         {/* Google Analytics 4 */}
@@ -73,27 +62,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               gtag('config', 'G-K8BNTKYNTH', { page_path: window.location.pathname });
             `,
           }}
-        />
-
-        {/* Adsterra */}
-        <Script
-          id="adsterra-config"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              var atOptions = {
-                'key' : '4fec492b1d10c0ec6fe34a7ba2e84252',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-              };
-            `,
-          }}
-        />
-        <Script
-          strategy="afterInteractive"
-          src="https://www.highperformanceformat.com/4fec492b1d10c0ec6fe34a7ba2e84252/invoke.js"
         />
       </head>
       <body>
