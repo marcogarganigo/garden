@@ -480,7 +480,6 @@
             width="200"
             className="absolute bottom-0 right-12 "
           />
-          <a href="" className="w-min-content h-min-content" rel="nofollow"><img alt="banner" src="https://landings-cdn.adsterratech.com/referralBanners/png/80%20x%2030%20px.png" /></a>
 
           <div className="relative container mx-auto px-4 py-20 text-center">
             <p className="text-sm text-muted-foreground mb-6">
