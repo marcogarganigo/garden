@@ -16,6 +16,7 @@
   import DataVisualizations from "./DataVisualizations"
   import GardenLevel from "./GardenLevel"
   import { ArtistModal } from "./ArtistModal"
+  import bush from "../public/bush-right.png";
 
   interface Artist {
     name: string
@@ -475,7 +476,7 @@
         </div>
         <footer className="relative mt-24 overflow-hidden bg-transparent">
           <img
-            src={process.env.PUBLIC_URL + "/bush-right.png"}
+            src={bush.src}
             alt="Bush"
             width="200"
             className="absolute bottom-0 right-12 "
