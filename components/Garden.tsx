@@ -16,7 +16,6 @@
   import DataVisualizations from "./DataVisualizations"
   import GardenLevel from "./GardenLevel"
   import { ArtistModal } from "./ArtistModal"
-  import AdsterraBanner from "./AdsterraBanner"
 
   interface Artist {
     name: string
@@ -476,12 +475,11 @@
         </div>
         <footer className="relative mt-24 overflow-hidden bg-transparent">
           <img
-            src="/bush-right2.png"
+            src={process.env.PUBLIC_URL + "/bush-right.png"}
             alt="Bush"
             width="200"
             className="absolute bottom-0 right-12 "
           />
-          <AdsterraBanner />
 
           <div className="relative container mx-auto px-4 py-20 text-center">
             <p className="text-sm text-muted-foreground mb-6">
