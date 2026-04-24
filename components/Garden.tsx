@@ -474,7 +474,7 @@
             />
           )}
         </div>
-        <footer className="relative mt-24 overflow-hidden bg-transparent">
+        <footer className="sticky mt-24 overflow-hidden bg-transparent">
           <img
             src={bush.src}
             alt="Bush"
