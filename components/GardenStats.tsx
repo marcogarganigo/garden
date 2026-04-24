@@ -58,6 +58,9 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
     visible: { opacity: 1, y: 0 },
   };
 
+  const totalMinutes: number = Math.floor(totalPlays * 3.5);
+  const hours: number = Math.floor(totalMinutes / 60);
+  const days: number = Math.floor(hours / 24);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -74,14 +77,7 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
               Total Plays
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-primary">
-              <motion.span>{animatedTotalPlays}</motion.span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {userStats ? "Entire profile" : "Displayed artists"} • ~{Math.round((totalPlays * 3.5) / 60)} hours
-            </p>
-          </CardContent>
+          <CardContent> <div className="text-2xl font-bold text-primary"> <motion.span>{animatedTotalPlays}</motion.span> </div> <div className="text-xs text-muted-foreground mt-1 flex flex-wrap items-center gap-x-2 gap-y-1"> <span className="whitespace-nowrap"> {userStats ? "Entire profile" : "Displayed artists"} </span> <span className="opacity-40">•</span> <span className="flex items-center gap-1 whitespace-nowrap"> <span className="font-medium text-foreground"> {totalMinutes.toLocaleString()} </span> <span className=" font-semibold">m</span> </span> <span className="opacity-40">•</span> <span className="flex items-center gap-1 whitespace-nowrap"> <span className="font-medium">{hours}</span> <span className="font-semibold">h</span> </span> <span className="opacity-40">•</span> <span className="flex items-center gap-1 whitespace-nowrap"> <span className="font-medium">{days}</span> <span className="font-semibold">d</span> </span> </div> </CardContent>
         </Card>
       </motion.div>
 
