@@ -282,21 +282,113 @@
     }
 
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen flex flex-col">
         <div className="relative z-10 container mx-auto px-4 py-8">
           <div className="text-center mb-12">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center justify-center gap-3 mb-4"
+              transition={{ duration: 0.6 }}
+              className="flex items-center justify-center gap-4 mb-6"
             >
-              <Sparkles className="w-8 h-8 text-secondary" />
-              <h1 className="text-5xl md:text-6xl font-serif font-black">
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent transition-all duration-300 hover:scale-105">Garden</span>
-                <span onClick={() => window.location.reload()} className="bg-gradient-to-r from-secondary to-purple-500 bg-clip-text text-transparent inline-block transition-all duration-300 hover:scale-105 cursor-pointer">.fm</span>
-              </h1>
-              <Music className="w-8 h-8 text-accent animate-pulse-slow" />
+              <Sparkles className="w-7 h-7 text-secondary animate-pulse" />
+
+              <div className="flex items-end font-serif font-black leading-none">
+                
+                {/* Garden.fm */}
+                <div className="flex items-end">
+                  
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    className="text-5xl md:text-7xl font-black tracking-[-0.02em]
+                              bg-gradient-to-b from-green-500 via-green-700 to-green-900
+                              bg-clip-text text-transparent
+                              drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
+                  >
+                    Garden
+                  </motion.span>
+
+                  <motion.span
+                    onClick={() => window.location.reload()}
+                    whileHover={{ scale: 1.15, rotate: -5 }}
+                    className="ml-1 text-3xl md:text-5xl font-bold 
+                              bg-gradient-to-br from-secondary to-purple-500 
+                              bg-clip-text text-transparent 
+                              cursor-pointer translate-y-[-4px]"
+                  >
+                    .fm
+                  </motion.span>
+
+                </div>
+
+                {/* rose */}
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-8 h-8 text-rose-500 ml-3 mb-2"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: 1,
+                    scale: [1, 1.05, 1],
+                    filter: [
+                      "drop-shadow(0 0 0px rgba(244,63,94,0))",
+                      "drop-shadow(0 0 8px rgba(244,63,94,0.35))",
+                      "drop-shadow(0 0 0px rgba(244,63,94,0))",
+                    ],
+                  }}
+                  transition={{
+                    opacity: { duration: 0.4, delay: 0.3 },
+                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                    filter: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                  }}
+                >
+                  <motion.path
+                    d="M17 10h-1a4 4 0 1 1 4-4v.534"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.8 }}
+                  />
+                  <motion.path
+                    d="M17 6h1a4 4 0 0 1 1.42 7.74l-2.29.87a6 6 0 0 1-5.339-10.68l2.069-1.31"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1.1, delay: 0.1 }}
+                  />
+                  <motion.path
+                    d="M4.5 17c2.8-.5 4.4 0 5.5.8s1.8 2.2 2.3 3.7c-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1.2, delay: 0.2 }}
+                  />
+                  <motion.path
+                    d="M9.77 12C4 15 2 22 2 22"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.9, delay: 0.3 }}
+                  />
+                  <motion.circle
+                    cx="17"
+                    cy="8"
+                    r="2"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.6 }}
+                  />
+                </motion.svg>
+
+              </div>
+
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 4 }}
+              >
+                <Music className="w-7 h-7 text-accent" />
+              </motion.div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -474,7 +566,7 @@
             />
           )}
         </div>
-        <footer className="sticky bottom-0 mt-24 overflow-hidden bg-transparent">
+        <footer className="mt-24 overflow-hidden bg-transparent">
           <img
             src={bush.src}
             alt="Bush"
