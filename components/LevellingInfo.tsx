@@ -1,25 +1,49 @@
+"use client"
+
 // app/levelling-info/page.tsx
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import {
+    TreePine,
+    Flower2,
+    Flower,
+    Rose,
+    Leaf,
+    Sprout,
+    TreeDeciduous,
+    ChevronLeft
+} from "lucide-react";
 
 const LevellingInfoPage = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="text-left top-0 mb-6">
                 <Link href="/">
-                    <Button className="cursor-pointer" variant="outline">
+                    <Button className="cursor-pointer group" variant="outline">
+                        <ChevronLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
                         Back to garden
                     </Button>
                 </Link>
             </div>
 
-            <div className="text-center mb-8">
-                <h1 className="text-4xl font-bold mb-2">Welcome to Garden.fm!</h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                    Think of your listening habits as the seeds that grow your musical garden. 
-                    The more variety you listen to, the more your garden flourishes. 
-                    Here's how the global levelling system works.
-                </p>
+            <div className="text-center mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h1 className="text-5xl md:text-6xl font-black mb-4 py-2 bg-gradient-to-r from-green-600 via-emerald-500 to-teal-400 bg-clip-text text-transparent leading-tight">
+                        🌿 Garden Guide
+                    </h1>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        Welcome to the <strong>Garden.fm Guide</strong>. 
+                        This page is your reference to understanding how your musical habits are 
+                        transformed into a flourishing ecosystem. Discover how the global leveling system 
+                        calculates your progress, what your gardener rank means, and how each 
+                        plant in your garden evolves based on your listening history.
+                    </p>
+                </motion.div>
             </div>
 
             <div className="prose dark:prose-invert max-w-none">
@@ -53,7 +77,7 @@ const LevellingInfoPage = () => {
                 <p>
                     This creates a smooth progression curve where early levels are quick 
                     to earn, while higher levels require more variety and dedication. 
-                    The maximum level is <strong>100</strong>.
+                    <strong> There is no maximum level</strong>, you can keep cultivating your garden indefinitely!
                 </p>
 
                 <h3 className="text-xl font-semibold mt-8 mb-4">📌 XP Needed for Each Level</h3>
@@ -80,7 +104,42 @@ const LevellingInfoPage = () => {
                     <li><strong>Level 25–49:</strong> 🌱 Growing Gardener</li>
                     <li><strong>Level 50–74:</strong> 🌿 Skilled Gardener</li>
                     <li><strong>Level 75–99:</strong> 🌺 Expert Gardener</li>
-                    <li><strong>Level 100:</strong> 🌳 Master Gardener</li>
+                    <li><strong>Level 100+:</strong> 🌳 Master Gardener</li>
+                </ul>
+
+                <h2 className="text-2xl font-semibold mt-8 mb-4">🌲 Plant Evolutions</h2>
+
+                <p>Each artist in your garden grows based on their total playcount:</p>
+
+                <ul className="list-none space-y-4">
+                    <li className="flex items-center gap-3">
+                        <Sprout className="w-6 h-6 text-amber-600" />
+                        <span><strong>0–499 plays:</strong> Sprout</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                        <Leaf className="w-6 h-6 text-lime-600" />
+                        <span><strong>500–999 plays:</strong> Fern</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                        <Rose className="w-6 h-6 text-rose-500" />
+                        <span><strong>1,000–1,999 plays:</strong> Rose</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                        <Flower className="w-6 h-6 text-pink-500" />
+                        <span><strong>2,000–4,999 plays:</strong> Tulip</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                        <Flower2 className="w-6 h-6 text-yellow-500" />
+                        <span><strong>5,000–9,999 plays:</strong> Sunflower</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                        <TreePine className="w-6 h-6 text-green-600" />
+                        <span><strong>10,000–19,999 plays:</strong> Mighty Oak</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                        <TreeDeciduous className="w-6 h-6 text-emerald-600" />
+                        <span><strong>20,000+ plays:</strong> Ancient Tree</span>
+                    </li>
                 </ul>
 
                 <h2 className="text-2xl font-semibold mt-8 mb-4">📊 Progress to the Next Level</h2>

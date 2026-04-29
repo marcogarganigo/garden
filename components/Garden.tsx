@@ -8,7 +8,7 @@
   import { Input } from "@/components/ui/input"
   import { Card, CardContent } from "@/components/ui/card"
   import { Badge } from "@/components/ui/badge"
-  import { Loader2, Music, Sparkles, Leaf, MessageSquare } from "lucide-react"
+  import { Loader2, Music, Sparkles, Leaf, MessageSquare, Zap, Link } from "lucide-react"
   import { GitHubIcon } from "@/components/icons/Github"
   import PlantCard from "./PlantCard"
   import GardenStats from "./GardenStats"
@@ -409,17 +409,32 @@
                 listening history and watch your personal garden flourish with every beat,
                 melody, and rhythm you cherish.
               </p>
-              <motion.a
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                href="info"
-                className="inline-flex items-center px-5 py-2.5 rounded-xl border border-primary/40 text-sm font-semibold 
-                          text-primary/90 hover:text-primary hover:border-primary bg-background/40 backdrop-blur-sm 
-                          transition-all duration-300 shadow-sm hover:shadow-md"
-              >
-                How It Works
-              </motion.a>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <motion.a
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  href="info"
+                  className="inline-flex items-center px-5 py-2.5 rounded-xl border border-primary/40 text-sm font-semibold 
+                            text-primary/90 hover:text-primary hover:border-primary bg-background/40 backdrop-blur-sm 
+                            transition-all duration-300 shadow-sm hover:shadow-md"
+                >
+                  How It Works
+                </motion.a>
+
+                <motion.a
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  href="changelog"
+                  className="inline-flex items-center px-5 py-2.5 rounded-xl border border-secondary/40 text-sm font-semibold 
+                            text-secondary/90 hover:text-secondary hover:border-secondary bg-background/40 backdrop-blur-sm 
+                            transition-all duration-300 shadow-sm hover:shadow-md"
+                >
+                  <Zap className="w-4 h-4 mr-2 text-secondary" />
+                  Changelog
+                </motion.a>
+              </div>
             </motion.div>
           </div>
           <motion.form
@@ -580,7 +595,9 @@
             </p>
 
             {/* Signs in the garden */}
-            <div className="flex items-center justify-center gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              
+
               <a
                 href={GITHUB_URL}
                 target="_blank"

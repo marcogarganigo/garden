@@ -58,9 +58,11 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
     visible: { opacity: 1, y: 0 },
   };
 
-  const totalMinutes: number = Math.floor(totalPlays * 3.5);
-  const hours: number = Math.floor(totalMinutes / 60);
-  const days: number = Math.floor(hours / 24);
+  const totalMinutes = Math.floor(totalPlays * 3.5)
+  const remainingMinutes = totalMinutes % 60
+  const totalHours = Math.floor(totalMinutes / 60)
+  const remainingHours = totalHours % 24
+  const days = Math.floor(totalHours / 24)
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -69,6 +71,7 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
         initial="hidden"
         animate="visible"
         transition={{ delay: 0.1, duration: 0.5 }}
+        className="lg:col-span-2"
       >
         <Card className="border-0 bg-card/80 backdrop-blur-sm card-glow h-full">
           <CardHeader className="pb-3">
@@ -77,7 +80,31 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
               Total Plays
             </CardTitle>
           </CardHeader>
-          <CardContent> <div className="text-2xl font-bold text-primary"> <motion.span>{animatedTotalPlays}</motion.span> </div> <div className="text-xs text-muted-foreground mt-1 flex flex-wrap items-center gap-x-2 gap-y-1"> <span className="whitespace-nowrap"> {userStats ? "Entire profile" : "Displayed artists"} </span> <span className="opacity-40">•</span> <span className="flex items-center gap-1 whitespace-nowrap"> <span className="font-medium text-foreground"> {totalMinutes.toLocaleString()} </span> <span className=" font-semibold">m</span> </span> <span className="opacity-40">•</span> <span className="flex items-center gap-1 whitespace-nowrap"> <span className="font-medium">{hours}</span> <span className="font-semibold">h</span> </span> <span className="opacity-40">•</span> <span className="flex items-center gap-1 whitespace-nowrap"> <span className="font-medium">{days}</span> <span className="font-semibold">d</span> </span> </div> </CardContent>
+          <CardContent>
+            <div className="text-3xl font-black text-primary mb-1">
+              <motion.span>{animatedTotalPlays}</motion.span>
+              <span className="text-xs font-medium text-muted-foreground ml-2">plays</span>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+              <div className="flex flex-col items-center justify-center bg-primary/5 py-3 rounded-xl border border-primary/10 px-2">
+                <span className="text-[10px] font-bold text-primary/70 uppercase tracking-wider mb-1">Minutes</span>
+                <span className="text-sm font-black text-primary truncate w-full text-center">{totalMinutes.toLocaleString()}</span>
+              </div>
+              <div className="flex flex-col items-center justify-center bg-secondary/5 py-3 rounded-xl border border-secondary/10 px-2">
+                <span className="text-[10px] font-bold text-secondary/70 uppercase tracking-wider mb-1">Hours</span>
+                <span className="text-sm font-black text-secondary truncate w-full text-center">{totalHours.toLocaleString()}</span>
+              </div>
+              <div className="flex flex-col items-center justify-center bg-accent/5 py-3 rounded-xl border border-accent/10 px-2">
+                <span className="text-[10px] font-bold text-accent/70 uppercase tracking-wider mb-1">Days</span>
+                <span className="text-sm font-black text-accent truncate w-full text-center">{days.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <p className="text-xs text-muted-foreground/60 text-center mt-4 font-medium italic">
+              {userStats ? "Based on your full Last.fm profile history" : "Based on top artists shown in your garden"}
+            </p>
+          </CardContent>
         </Card>
       </motion.div>
 
@@ -132,6 +159,7 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
         initial="hidden"
         animate="visible"
         transition={{ delay: 0.4, duration: 0.5 }}
+        className="lg:col-span-4"
       >
         <Card className="border-0 bg-card/80 backdrop-blur-sm card-glow h-full">
           <CardHeader className="pb-3">
@@ -141,24 +169,27 @@ export default function GardenStats({ artists, userStats }: GardenStatsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs">🌳 Trees</span>
-                <Badge variant="outline" className="text-xs">
-                  <motion.span>{animatedTrees}</motion.span>
-                </Badge>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-muted-foreground uppercase font-bold tracking-wider">🌳 Trees</span>
+                <div className="flex items-center gap-2">
+                   <span className="text-2xl font-black"><motion.span>{animatedTrees}</motion.span></span>
+                   <Badge variant="outline" className="text-[10px]">Mature artists</Badge>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs">🌻 Flowers</span>
-                <Badge variant="outline" className="text-xs">
-                  <motion.span>{animatedFlowers}</motion.span>
-                </Badge>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-muted-foreground uppercase font-bold tracking-wider">🌻 Flowers</span>
+                <div className="flex items-center gap-2">
+                   <span className="text-2xl font-black"><motion.span>{animatedFlowers}</motion.span></span>
+                   <Badge variant="outline" className="text-[10px]">Growing artists</Badge>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs">🌱 Sprouts</span>
-                <Badge variant="outline" className="text-xs">
-                  <motion.span>{animatedSprouts}</motion.span>
-                </Badge>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-muted-foreground uppercase font-bold tracking-wider">🌱 Sprouts</span>
+                <div className="flex items-center gap-2">
+                   <span className="text-2xl font-black"><motion.span>{animatedSprouts}</motion.span></span>
+                   <Badge variant="outline" className="text-[10px]">New discoveries</Badge>
+                </div>
               </div>
             </div>
           </CardContent>

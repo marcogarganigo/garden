@@ -43,13 +43,11 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
   }
 
   const calculateLevel = (xp: number) => {
-    const level = Math.floor(Math.sqrt(xp / 10)) + 1
-    return Math.min(level, 100)
+    return Math.floor(Math.sqrt(xp / 10)) + 1
   }
 
   const getXPForLevel = (level: number) => {
     if (level <= 1) return 0
-    if (level > 100) return 99 * 99 * 10
     return (level - 1) * (level - 1) * 10
   }
 
@@ -67,7 +65,7 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
   const nextLevelXP = getXPForLevel(currentLevel + 1)
   const progressXP = currentXP - currentLevelXP
   const neededXP = nextLevelXP - currentLevelXP
-  const progressPercentage = currentLevel >= 100 ? 100 : (progressXP / neededXP) * 100
+  const progressPercentage = (progressXP / neededXP) * 100
 
   const title = getGardenerTitle(currentLevel)
 
@@ -80,8 +78,8 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
   const animatedCurrentXP = useAnimatedNumber(currentXP);
 
   // Animate the progress bar
-  const animatedProgressXP = currentLevel < 100 ? useAnimatedNumber(progressXP) : null;
-  const animatedNeededXP = currentLevel < 100 ? useAnimatedNumber(neededXP) : null;
+  const animatedProgressXP = useAnimatedNumber(progressXP);
+  const animatedNeededXP = useAnimatedNumber(neededXP);
 
   return (
     <Card className="card-glow border-0 shadow-xl mb-8">
@@ -125,42 +123,30 @@ export default function GardenLevel({ totalPlays, artistCount, tracksCount, gard
           </motion.div>
         </motion.div>
 
-        {currentLevel < 100 && (
-          <div className="space-y-2">
-            <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-muted-foreground">
-                Progress to <span className="text-primary">Level {currentLevel + 1}</span>
-              </span>
-              <span className="text-foreground">
-                <motion.span>{animatedProgressXP}</motion.span> / <motion.span>{animatedNeededXP}</motion.span> XP
-              </span>
-            </div>
-            {/* Animated progress bar with Framer Motion */}
-            <motion.div
-              initial={{ width: "0%" }}
-              animate={{ width: `${(progressXP / neededXP) * 100}%` }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="h-3 rounded-full bg-primary/20"
-            >
-              <div
-                className="h-full bg-gradient-to-r from-primary/50 to-primary rounded-full"
-                style={{ width: `100%` }}
-              />
-            </motion.div>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center text-sm font-semibold">
+            <span className="text-muted-foreground">
+              Progress to <span className="text-primary">Level {currentLevel + 1}</span>
+            </span>
+            <span className="text-foreground">
+              <motion.span>{animatedProgressXP}</motion.span> / <motion.span>{animatedNeededXP}</motion.span> XP
+            </span>
           </div>
-        )}
-
-        {currentLevel >= 100 && (
+          {/* Animated progress bar with Framer Motion */}
           <motion.div
-            className="text-center py-2 space-y-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
+            initial={{ width: "0%" }}
+            animate={{ width: `${(progressXP / neededXP) * 100}%` }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="h-3 rounded-full bg-primary/20"
           >
-            <p>🏆 Max Level Reached!</p>
-
+            <div
+              className="h-full bg-gradient-to-r from-primary/50 to-primary rounded-full"
+              style={{ width: `100%` }}
+            />
           </motion.div>
-        )}
+        </div>
+
+
 
         <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-border/50">
           {/* Statistics without entry animation to avoid conflicting with the count */}
