@@ -2,6 +2,7 @@
 import { ReactNode } from "react";
 import Script from "next/script";
 import { Open_Sans, Montserrat } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <div className="min-h-screen garden-bg">{children}</div>
+        <Toaster closeButton />
       </body>
     </html>
   );

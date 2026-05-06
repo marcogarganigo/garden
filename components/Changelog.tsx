@@ -8,6 +8,20 @@ import { Calendar, Tag, ChevronLeft, Sparkles, Zap, Leaf, Rose, ChevronDown } fr
 
 const changelogEntries = [
     {
+        date: "May 06, 2026",
+        version: "v1.2.0",
+        title: "Artist Rankings & Profile Persistence",
+        description: "Introduced live global data insights and persistent user profiles. Your musical garden now remembers you and provides deep context on your global impact.",
+        updates: [
+            "Persistent Profiles: Your last searched gardener is now saved locally, so your garden is always ready when you return.",
+            "Global Rankings: See the exact number of global listeners and scrobbles for any artist in your garden.",
+            "Percentile Estimation: Discover if you are in the top 1% or just a casual listener based on live averages.",
+            "Impact Tracking: Find out exactly what percentage of an artist's total scrobbles comes from you.",
+            "Integrated Modal: Click any plant to open the new, sleek dual-column stats modal."
+        ],
+        type: "major"
+    },
+    {
         date: "April 29, 2026",
         version: "v1.1.0",
         title: "Level cap removed & reference guide",
@@ -70,7 +84,7 @@ const Changelog = () => {
                     </header>
 
                     <div className="space-y-12 relative">
-                        <motion.div 
+                        <motion.div
                             initial={{ height: 0 }}
                             animate={{ height: "100%" }}
                             transition={{ duration: 1.5, ease: "easeInOut" }}
@@ -99,11 +113,10 @@ const Changelog = () => {
                                             <Calendar className="w-4 h-4 text-muted-foreground" />
                                             <time className="text-sm font-medium text-muted-foreground">{entry.date}</time>
                                         </div>
-                                        <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
-                                            entry.type === 'major' ? 'bg-yellow-100 text-yellow-800' : 
-                                            entry.type === 'launch' ? 'bg-blue-100 text-blue-800' : 
-                                            'bg-green-100 text-green-800'
-                                        }`}>
+                                        <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${entry.type === 'major' ? 'bg-yellow-100 text-yellow-800' :
+                                                entry.type === 'launch' ? 'bg-blue-100 text-blue-800' :
+                                                    'bg-green-100 text-green-800'
+                                            }`}>
                                             {entry.version}
                                         </span>
                                     </div>
