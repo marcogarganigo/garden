@@ -95,6 +95,7 @@ export default function MusicalGarden() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [gardenCreated, setGardenCreated] = useState(false)
+  const [hasSavedUser, setHasSavedUser] = useState(false)
 
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null)
   const [artistDetails, setArtistDetails] = useState<any>(null)
@@ -110,6 +111,7 @@ export default function MusicalGarden() {
     const savedUsername = localStorage.getItem("garden-username");
     if (savedUsername) {
       setUsername(savedUsername);
+      setHasSavedUser(true);
       fetchTopArtists(savedUsername);
     }
 
@@ -268,6 +270,7 @@ export default function MusicalGarden() {
       setGardenCreated(true)
       setDisplayedUsername(user)
       localStorage.setItem("garden-username", user)
+      setHasSavedUser(true)
     } catch (err) {
       console.error("Error fetching data:", err)
       setError("Something went wrong. Please try again later.")
@@ -307,6 +310,18 @@ export default function MusicalGarden() {
     }
   };
 
+  const handleForget = () => {
+    localStorage.removeItem("garden-username")
+    setUsername("")
+    setDisplayedUsername("")
+    setGardenCreated(false)
+    setArtists([])
+    setUserStats(null)
+    setMusicInsights(null)
+    setHasSavedUser(false)
+    toast.success("Gardener forgotten!")
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     fetchTopArtists(username)
@@ -322,28 +337,42 @@ export default function MusicalGarden() {
             exit={{ opacity: 0, x: 20 }}
             className="absolute top-4 right-4 md:top-8 md:right-8 z-[60] hidden md:block"
           >
-            <a
-              href={`https://www.last.fm/user/${userStats.userInfo.name}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-background/80 backdrop-blur-xl p-1.5 pr-4 rounded-full border border-primary/20 shadow-xl hover:shadow-primary/10 hover:border-primary/40 transition-all group"
-            >
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 bg-muted flex items-center justify-center shrink-0">
-                {userStats.userInfo.image?.find((img: any) => img.size === "medium")?.["#text"] ? (
-                  <img
-                    src={userStats.userInfo.image.find((img: any) => img.size === "medium")?.["#text"]}
-                    alt={userStats.userInfo.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <User className="w-5 h-5 text-muted-foreground" />
-                )}
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground leading-none mb-0.5">Gardener</span>
-                <span className="text-sm font-black text-foreground leading-none group-hover:text-primary transition-colors">{userStats.userInfo.name}</span>
-              </div>
-            </a>
+            <div className="flex items-center bg-background/80 backdrop-blur-xl p-1 rounded-full border border-primary/20 shadow-xl hover:shadow-primary/10 hover:border-primary/40 transition-all group/badge">
+              <a
+                href={`https://www.last.fm/user/${userStats.userInfo.name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 pr-3 transition-colors rounded-full"
+              >
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 bg-muted flex items-center justify-center shrink-0">
+                  {userStats.userInfo.image?.find((img: any) => img.size === "medium")?.["#text"] ? (
+                    <img
+                      src={userStats.userInfo.image.find((img: any) => img.size === "medium")?.["#text"]}
+                      alt={userStats.userInfo.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-5 h-5 text-muted-foreground" />
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground leading-none mb-0.5">Gardener</span>
+                  <span className="text-sm font-black text-foreground leading-none group-hover/badge:text-primary transition-colors">{userStats.userInfo.name}</span>
+                </div>
+              </a>
+              
+              <div className="w-[1px] h-6 bg-primary/10 mx-1" />
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleForget}
+                className="h-8 w-8 p-0 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors mr-1"
+                title="Forget this gardener"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -509,16 +538,29 @@ export default function MusicalGarden() {
           onSubmit={handleSubmit}
           className="flex flex-col md:flex-row max-w-xl mx-auto items-center justify-center gap-4 mb-12"
         >
-          <div className="flex-1 w-full">
+          <div className="flex-1 w-full relative group">
             <Input
               id="username"
               type="text"
               placeholder="Your Last.fm username..."
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="h-12 text-lg border-2 border-primary/20 focus:border-primary transition-colors bg-background/50 backdrop-blur-sm"
+              className="h-12 text-lg border-2 border-primary/20 focus:border-primary transition-colors bg-background/50 backdrop-blur-sm pr-12"
               disabled={loading}
             />
+            {hasSavedUser && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleForget}
+                disabled={loading}
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-9 w-9 p-0 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100 disabled:opacity-50"
+                title="Forget this gardener"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            )}
           </div>
           <Button
             type="submit"
@@ -589,20 +631,8 @@ export default function MusicalGarden() {
 
               <div className="space-y-8 mb-12">
                 <div className="text-center">
-                  <h2 className="text-3xl font-serif font-bold text-primary mb-4 flex items-center justify-center gap-3">
+                  <h2 className="text-2xl md:text-3xl font-serif font-bold text-primary mb-4 flex items-center justify-center gap-3">
                     🌿 {displayedUsername}'s Musical Garden
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        localStorage.removeItem("garden-username");
-                        window.location.reload();
-                      }}
-                      className="h-8 w-8 p-0 rounded-full text-muted-foreground hover:text-destructive transition-colors"
-                      title="Forget this gardener"
-                    >
-                      <X className="w-4 h-4" />
-                    </Button>
                   </h2>
                   <Badge variant="secondary" className="text-lg px-4 py-2">
                     {artists.length} flourishing plants
